@@ -1395,7 +1395,6 @@ export class VexFlowMeasure extends GraphicalMeasure {
             return;
         }
         const vexFlowVoiceEntry: VexFlowVoiceEntry = voiceEntry as VexFlowVoiceEntry;
-        const nNotes: number = voiceEntry.notes.length;
         voiceEntry.notes.forEach((note, stringIndex) => {
             const stringInstruction: TechnicalInstruction = note.sourceNote.StringInstruction;
             if (stringInstruction) {
@@ -1407,18 +1406,7 @@ export class VexFlowMeasure extends GraphicalMeasure {
                 //     offsetY += 10;
                 // }
                 vfStringNumber.setOffsetY(offsetY);
-                let pos: Position;
-                if (nNotes === 1) {
-                    pos = Position.RIGHT;
-                } else if (stringIndex === nNotes - 1) {
-                    pos = Position.ABOVE;
-                } else if (stringIndex === 0) {
-                    pos = Position.BELOW;
-                } else {
-                    pos = stringIndex % 2 ? Position.RIGHT : Position.LEFT;
-                }
-
-                vfStringNumber.setPosition(pos);
+                vfStringNumber.setPosition(Position.RIGHT);
                 vexFlowVoiceEntry.vfStaveNote.addModifier((stringIndex as any), (vfStringNumber as any)); // see addModifier() above
             }
         });
